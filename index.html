@@ -1,13 +1,35 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <title>Nina Komel - portfolio</title>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+    <header class="website-header">
+      <div class="container flex flex-between">
+        <div class="header-brand">Nina Komel</div>
+
+        <ul class="header-list flex">
+          <li>&#9742; <a href="tel:+381616272677">+381616272677.</a></li>
+          <li>
+            &#9993; <a href="mailto:ninakomel@gmail.com">ninakomel@gmail.com</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <main>
+      <div class="container website-content">
+        <div id="form-container"></div>
+        <div class="works-container" id="works-container"></div>
+      </div>
+    </main>
+    <footer class="website-footer">
+      <span id="copyright">
+        &#169; Nina Komel <span id="js-current-year"></span
+      ></span>
+    </footer>
+    <script type="module" src="/src/scripts/index.ts"></script>
   </body>
 </html>
