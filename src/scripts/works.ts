@@ -1,4 +1,5 @@
 import worksJson from './works.json';
+const { BASE_URL } = import.meta.env;
 
 interface WorkInt {
   title: string;
@@ -55,7 +56,7 @@ const createWorkElement = (work: WorkInt): HTMLDivElement => {
   work.files.map((file: string) => {
     const img = document.createElement('img') as HTMLImageElement;
 
-    img.src = file;
+    img.src = BASE_URL + '/' + file;
     img.classList.add('work-image');
     filesContainer.appendChild(img);
   });
