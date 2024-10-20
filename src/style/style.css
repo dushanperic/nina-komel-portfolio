@@ -100,18 +100,34 @@ li {
   text-align: left;
 }
 
+.password-form {
+  display: inline-block;
+  padding: 0.5rem;
+  width: auto;
+}
+
 .form-input {
   font-size: 1rem;
-  padding: 0.3rem;
+  padding: 0.5rem;
   padding-right: 25px;
   background-color: var(--background);
   border: 1px solid;
   border-color: var(--foreground);
 }
 
-.form-input > label {
-  display: block;
-  font-size: 0.7rem;
+.form-input::placeholder {
+  color: var(--foreground);
+}
+
+.password-form button {
+  background-color: var(--background);
+  color: var(--foreground);
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.error-message {
+  color: red;
 }
 
 .visibility-toggler {
@@ -119,14 +135,6 @@ li {
   margin-left: -40px;
   cursor: pointer;
   user-select: none;
-}
-
-.password-form {
-  padding: 1rem;
-}
-
-.password-form > label {
-  display: block;
 }
 
 .work {

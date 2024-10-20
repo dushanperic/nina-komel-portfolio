@@ -1,21 +1,32 @@
 import { renderWorks, setStorage } from './works';
 
-const _input = '123';
+const _input_match = '123';
 const formContainer = document.querySelector<HTMLDivElement>('#form-container');
 
+const handleError = (msg: string) => {
+  const errorContainer =
+    document.querySelector<HTMLSpanElement>('#error-message');
+
+  if (!errorContainer) return;
+
+  errorContainer.innerHTML = msg;
+};
+
 export const handleSubmit = (e: SubmitEvent) => {
-  const input = document.querySelector<HTMLInputElement>('#preview-password');
-
   e.preventDefault();
+  const input = document.querySelector<HTMLInputElement>('#preview-password');
+  const isValid = validate(input?.value as string);
 
-  const inputVal = input?.value;
-
-  if (inputVal === _input) {
+  if (isValid) {
     setStorage(JSON.stringify(new Date()));
     renderWorks();
     formContainer?.remove();
+  } else {
+    handleError('Wrong password...');
   }
 };
+
+const validate = (value: string) => value === _input_match;
 
 export const togglePasswordVisibity = (e: MouseEvent) => {
   const input = document.querySelector<HTMLInputElement>('#preview-password');
@@ -38,31 +49,39 @@ export const renderForm = () => {
 
   formContainer.innerHTML = `
       <form id="password-form" class="password-form">
-        <label for="preview-password">Password</label>
-        <input
-          type="password"
-          name="preview-password"
-          id="preview-password"
-          class="form-input"
-        />
-        <span
-          tabindex="0"
-          class="visibility-toggler"
-          id="visibility-toggler"
-          title="Toggle password visibility"
-          >&#128526;</span
-        >
-        <button type="submit">Ok</button>
+        <div>
+            <label for="preview-password" class="hidden">Password</label>
+            <input
+                type="password"
+                placeholder="Please enter password"
+                name="preview-password"
+                id="preview-password"
+                class="form-input"
+            />
+            <span
+                tabindex="0"
+                class="visibility-toggler"
+                id="visibility-toggler"
+                title="Toggle password visibility">
+                &#128526;
+            </span>
+            <button type="submit">Ok</button>
+        </div>
+        <span id="error-message" class="error-message"></span>
       </form>
       `;
 
   const form: HTMLElement | null = document.getElementById('password-form');
-  form?.addEventListener('submit', (e) => handleSubmit(e));
-
   const passwordToggler = document.querySelector<HTMLSpanElement>(
     '#visibility-toggler'
   );
+  const passwordInput =
+    document.querySelector<HTMLInputElement>('#preview-password');
 
+  form?.addEventListener('submit', (e) => handleSubmit(e));
+  passwordInput?.addEventListener('input', () => {
+    handleError('');
+  });
   passwordToggler?.addEventListener('click', (e) => {
     togglePasswordVisibity(e);
   });
