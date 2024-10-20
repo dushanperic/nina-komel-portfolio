@@ -4,17 +4,32 @@ const _input = '123';
 const formContainer = document.querySelector<HTMLDivElement>('#form-container');
 
 export const handleSubmit = (e: SubmitEvent) => {
-  const passwordInput =
-    document.querySelector<HTMLInputElement>('#preview-password');
+  const input = document.querySelector<HTMLInputElement>('#preview-password');
 
   e.preventDefault();
 
-  const inputVal = passwordInput?.value;
+  const inputVal = input?.value;
 
   if (inputVal === _input) {
     setStorage(JSON.stringify(new Date()));
     renderWorks();
     formContainer?.remove();
+  }
+};
+
+export const togglePasswordVisibity = (e: MouseEvent) => {
+  const input = document.querySelector<HTMLInputElement>('#preview-password');
+
+  const { target } = e;
+  if (input?.type) {
+    input.setAttribute(
+      'type',
+      input?.type === 'password' ? 'text' : 'password'
+    );
+  }
+
+  if (target && target instanceof HTMLElement) {
+    target.innerHTML = input?.type === 'password' ? `&#128526;` : `&#128064;`;
   }
 };
 
@@ -43,4 +58,12 @@ export const renderForm = () => {
 
   const form: HTMLElement | null = document.getElementById('password-form');
   form?.addEventListener('submit', (e) => handleSubmit(e));
+
+  const passwordToggler = document.querySelector<HTMLSpanElement>(
+    '#visibility-toggler'
+  );
+
+  passwordToggler?.addEventListener('click', (e) => {
+    togglePasswordVisibity(e);
+  });
 };

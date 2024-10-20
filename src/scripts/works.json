@@ -1,6 +1,7 @@
 {
   "works": [
     {
+      "id": 1,
       "title": "Vojvodjanski kuvar",
       "description": "Test description 1",
       "files": [
@@ -12,6 +13,7 @@
       ]
     },
     {
+      "id": 2,
       "title": "DNK Tatoo and pearcing studio",
       "description": "Test description 2",
       "files": [
@@ -21,6 +23,7 @@
       ]
     },
     {
+      "id": 3,
       "title": "New work 3",
       "description": "Test description 3",
       "files": [

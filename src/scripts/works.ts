@@ -1,15 +1,14 @@
-import worksJson from './works.json';
-const { BASE_URL } = import.meta.env;
+import { register } from 'swiper/element/bundle';
 
-interface WorkInt {
-  title: string;
-  description: string;
-  files: string[];
-}
+import worksJson from './works.json';
+import { GetSwiperSlidesPropsType, WorkInt } from '../types/common';
 
 export const localStorageKey = 'nina-komel.last_visit';
-const MAX_SESION_TIME = 10;
+const MAX_SESION_TIME = 100;
 const { works } = worksJson;
+const { BASE_URL } = import.meta.env;
+
+register(); // register Swiper custom elements
 
 const setStorage = (val: string) => {
   window.localStorage.setItem(localStorageKey, val);
@@ -41,30 +40,34 @@ const renderWorks = (): void => {
   });
 };
 
+const getSwiperSlides = ({ slides, name }: GetSwiperSlidesPropsType) => {
+  let result = ``;
+
+  slides.forEach((slide) => {
+    result += `<swiper-slide>
+                <img 
+                  src="${BASE_URL + '/' + slide}"
+                  alt="${name} - preview"
+                />
+              </swiper-slide>`;
+  });
+
+  return result;
+};
+
 const createWorkElement = (work: WorkInt): HTMLDivElement => {
   const container = document.createElement('div') as HTMLDivElement;
-  const filesContainer = document.createElement('div') as HTMLDivElement;
-  const title = document.createElement('span') as HTMLSpanElement;
-  const description = document.createElement('span') as HTMLSpanElement;
-
   container.classList.add('work');
 
-  title.classList.add('work-title');
-  description.classList.add('work-description');
-  filesContainer.classList.add('work-files');
-  title.innerHTML = work.title;
-  description.innerHTML = work.description;
-  work.files.map((file: string) => {
-    const img = document.createElement('img') as HTMLImageElement;
-
-    img.src = BASE_URL + '/' + file;
-    img.alt = `${work.title} preview`;
-    img.classList.add('work-image');
-    filesContainer.appendChild(img);
-  });
-  container.appendChild(title);
-  container.appendChild(filesContainer);
-  container.appendChild(description);
+  container.innerHTML = `
+    <span class="work-title">${work.title}</span>
+    <div class="work-files">
+      <swiper-container navigation="true" pagination="true">
+        ${getSwiperSlides({ slides: work.files, name: work.title })}
+      </swiper-container>
+    </div>
+    <span class="work-description">${work.description}</span>
+  `;
 
   return container;
 };
