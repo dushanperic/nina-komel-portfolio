@@ -48,6 +48,7 @@ const createWorkElement = (work: WorkInt): HTMLDivElement => {
   const description = document.createElement('span') as HTMLSpanElement;
 
   container.classList.add('work');
+
   title.classList.add('work-title');
   description.classList.add('work-description');
   filesContainer.classList.add('work-files');

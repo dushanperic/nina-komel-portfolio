@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  transition: color 200ms ease;
+  transition: backround-color 200ms ease;
 }
 
 :root {
@@ -21,28 +23,32 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: var(--foreground);
-  text-decoration: inherit;
-}
-a:hover {
-  color: #fbfbff;
-}
-
 body {
   margin: 0;
   width: 100%;
   min-width: 320px;
 }
 
+a {
+  font-weight: 500;
+  color: var(--foreground);
+  text-decoration: inherit;
+  transition: all 200ms ease;
+}
+
+a:hover {
+  opacity: 0.5;
+}
+
 button {
   font-size: 1rem;
   padding: 0.3rem;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -67,10 +73,6 @@ li {
   top: 0;
   background-color: var(--background);
   padding: 1rem 0;
-}
-
-.header-list li {
-  font-size: 1.4rem;
 }
 
 .header-brand {
