@@ -58,6 +58,7 @@ const createWorkElement = (work: WorkInt): HTMLDivElement => {
     const img = document.createElement('img') as HTMLImageElement;
 
     img.src = BASE_URL + '/' + file;
+    img.alt = `${work.title} preview`;
     img.classList.add('work-image');
     filesContainer.appendChild(img);
   });

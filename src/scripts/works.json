@@ -14,7 +14,11 @@
     {
       "title": "DNK Tatoo and pearcing studio",
       "description": "Test description 2",
-      "files": ["/dnk/dnk1-template.png", "/dnk/dnk2-template.png"]
+      "files": [
+        "/dnk/dnk1-template.png",
+        "/dnk/dnk2-template.png",
+        "/dnk/dnk3-template.png"
+      ]
     },
     {
       "title": "New work 3",
